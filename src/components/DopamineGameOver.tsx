@@ -1,0 +1,7 @@
+"use client";
+import Link from "next/link";
+import { ArrowRight, Crosshair, RotateCcw, Trophy } from "lucide-react";
+interface Props { score:number; kills:number; rank:number|null; isRecord:boolean; prevRecord:number; error?:string; onPlayAgain:()=>void; onSelectZone:()=>void; onExit:()=>void }
+export default function DopamineGameOver({score,kills,rank,isRecord,error,onPlayAgain,onSelectZone,onExit}:Props){
+ return <div className="game-panel-screen"><div className="game-result"><div className="game-eyebrow"><Trophy size={14}/> BACK AT BASE {isRecord && <span className="record-tag">NEW PERSONAL BEST</span>}</div><h1>JOURNEY <span>COMPLETE.</span></h1><div className="result-metrics"><div><small>FINAL SCORE</small><strong>{score.toLocaleString()} <em>XP</em></strong></div><div><small>ELIMINATIONS</small><strong>{kills}</strong></div><div><small>WEEKLY RANK</small><strong>{rank?`#${rank}`:"—"}</strong></div></div>{error && <p role="alert" className="game-error">{error}</p>}<div className="result-actions"><button className="game-action bright" onClick={onPlayAgain}><RotateCcw size={15}/> PLAY AGAIN</button><button className="game-action muted" onClick={onSelectZone}><Crosshair size={15}/> CHANGE MAP</button><button className="game-action muted" onClick={onExit}>CITY HOME</button><Link className="game-result-link" href="/leaderboard">LEADERBOARD <ArrowRight size={14}/></Link></div></div></div>;
+}
